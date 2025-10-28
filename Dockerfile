@@ -1,6 +1,7 @@
 # --- STAGE 1: The Builder ---
 # Use an official Maven image that includes JDK 17
-FROM maven:3.9.6-eclipse-temurin-17-jammy AS builder
+# This is the line we fixed (removed "-jammy")
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
 
 # Set the working directory
 WORKDIR /app
