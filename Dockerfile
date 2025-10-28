@@ -35,3 +35,4 @@ EXPOSE 8080
 # The command to run when the container starts
 ENTRYPOINT ["java", "-jar", "app.jar"]
 
+# Trigger new build
