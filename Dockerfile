@@ -36,3 +36,5 @@ EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
 
 # Trigger new build
+
+# Trigger new build again
