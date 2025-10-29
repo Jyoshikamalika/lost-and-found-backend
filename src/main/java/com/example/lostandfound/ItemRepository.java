@@ -1,14 +1,15 @@
 package com.example.lostandfound;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 import java.util.List;
 
-@Repository
+// This is an interface that Spring Boot will automatically implement for us
 public interface ItemRepository extends JpaRepository<Item, Long> {
-    
-    // Spring Data JPA automatically creates a method to find all items
-    // and sort them by the 'createdAt' field in descending order (newest first).
-    List<Item> findAllByOrderByCreatedAtDesc();
+
+    // THIS IS THE NEW LINE YOU ARE ADDING!
+    // This custom method tells Spring to find all items and sort them by the
+    // "reportedAt" field in descending order (newest first).
+    List<Item> findAllByOrderByReportedAtDesc();
 
 }
+
