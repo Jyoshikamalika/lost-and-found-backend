@@ -1,49 +1,30 @@
 package com.example.lostandfound;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity // Tells Spring this is a database table
-@EntityListeners(AuditingEntityListener.class) // For automatic timestamps
 public class Item {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank
     private String type; // "lost" or "found"
-
-    @NotBlank
     private String title;
-
-    @NotBlank
     private String description;
-    
-    @NotBlank
-    private String location;
+    private String contact; // This was in your original file
+    private String location; // This was in your original file
 
-    @NotBlank
-    private String contactName;
-    
-    @NotBlank
-    private String contactInfo;
+    // --- FIELDS NEEDED BY THE CONTROLLER ---
+    private LocalDateTime reportedAt;
+    private boolean claimed;
 
-    @NotBlank
-    private String status; // "active" or "claimed"
-
-    @CreatedDate // Automatically set when created
-    private Instant createdAt;
-
-    // --- Getters and Setters (required by JPA) ---
+    // --- GETTERS AND SETTERS ---
+    // Spring needs these to build the object
 
     public Long getId() {
         return id;
@@ -77,6 +58,14 @@ public class Item {
         this.description = description;
     }
 
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+    
     public String getLocation() {
         return location;
     }
@@ -85,35 +74,22 @@ public class Item {
         this.location = location;
     }
 
-    public String getContactName() {
-        return contactName;
+    // --- METHODS THE CONTROLLER WAS MISSING ---
+    
+    public LocalDateTime getReportedAt() {
+        return reportedAt;
     }
 
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
+    public void setReportedAt(LocalDateTime reportedAt) {
+        this.reportedAt = reportedAt;
     }
 
-    public String getContactInfo() {
-        return contactInfo;
+    public boolean isClaimed() {
+        return claimed;
     }
 
-    public void setContactInfo(String contactInfo) {
-        this.contactInfo = contactInfo;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
+    public void setClaimed(boolean claimed) {
+        this.claimed = claimed;
     }
 }
+
